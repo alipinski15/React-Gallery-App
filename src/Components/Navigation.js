@@ -1,13 +1,16 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
-const navBar = () => (
-  <nav className="main-nav">
-        <ul>
-          <li><a href='#'>Cats</a></li>
-          <li><a href='#'>Dogs</a></li>
-          <li><a href='#'>Computers</a></li>
-        </ul>
-      </nav>
-)
+const Navigation = (props) => {
+  return(
+    <nav className="main-nav">
+      <ul>
+        <li><NavLink exact to="/cats">Cats</NavLink></li>
+        <li><a href='#'>Dogs</a></li>
+        <li><a href='#'>Computers</a></li>
+      </ul>
+    </nav>
+  );
+}
 
-export default navBar;
+export default Navigation;
