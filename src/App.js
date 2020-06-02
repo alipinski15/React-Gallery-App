@@ -87,7 +87,7 @@ export default class App extends Component {
           :
           <Switch>
             <Route exact path ="/" render={() => <PhotoContainer data={this.state.images} topic="Nature" />} />
-            <Route exact path="/search/:search" component={PhotoContainer} />
+            <Route exact path="/search/:search" render={() => <PhotoContainer data={this.state.images} topic="Searched" />} />
             <Route path="/cats" render={() => <PhotoContainer data={this.state.cats} topic="Cats" />} />
             <Route path="/dogs" render={() => <PhotoContainer data={this.state.dogs} topic="Dogs" />} />
             <Route path="/computers" render={() => <PhotoContainer data={this.state.computers} topic="Computers" />} />
