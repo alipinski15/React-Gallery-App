@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+
 /**
  * The Search class filters images based on the topic entered into the Search field. 
  */

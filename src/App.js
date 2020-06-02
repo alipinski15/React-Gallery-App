@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './index.css';
 import  apiKey  from './config';
+import axios from 'axios';
+import { Route, Switch } from 'react-router-dom';
 
 //Importing other Components
 import Search from './Components/Search';
 import Navigation from './Components/Navigation';
-import ImageList from './Components/ImageList';
+import PhotoContainer from './Components/PhotoContainer';
+import NotFound from './Components/NotFound';
 
 
 export default class App extends Component {
@@ -26,17 +28,16 @@ export default class App extends Component {
     this.performSearch();
     this.catSearch();
     this.dogSearch();
-    this.computerSearch();
+    this.compSearch();
   }
   
   //This function fetches data from the API, then updates the state of the App.
 
-  performSearch = (query = 'flowers') => {
-    fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
-      .then(response => response.json())
-      .then(responseData => {
+  performSearch = (query = 'nature') => {
+    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
+      .then(response => {
         this.setState({ 
-          images: responseData.photos.photo,
+          images: response.data.photos.photo,
           loading: false
         });
       })
@@ -44,37 +45,32 @@ export default class App extends Component {
         console.log('Error fetching and parsing data', error);
       });
     }
-  
-  //The next three functions fetches data for the three Nav links.
 
   catSearch = () => {
-    fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=cats&per_page=24&format=json&nojsoncallback=1`)
-      .then(response => response.json())
-      .then(responseData => {
-        this.setState({ 
-          cats: responseData.photos.photo,
+    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=cats&per_page=24&format=json&nojsoncallback=1`)
+      .then(response => {
+        this.setState({
+          cats: response.data.photos.photo,
           loading: false
         });
       })
     }
 
   dogSearch = () => {
-    fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=dogs&per_page=24&format=json&nojsoncallback=1`)
-      .then(response => response.json())
-      .then(responseData => {
-        this.setState({ 
-          dogs: responseData.photos.photo,
+    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=dogs&per_page=24&format=json&nojsoncallback=1`)
+      .then(response => {
+        this.setState({
+          dogs: response.data.photos.photo,
           loading: false
         });
       })
     }
 
-  computerSearch = () => {
-    fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=computer&per_page=24&format=json&nojsoncallback=1`)
-      .then(response => response.json())
-      .then(responseData => {
-        this.setState({ 
-          computers: responseData.photos.photo,
+  compSearch = () => {
+    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=computers&per_page=24&format=json&nojsoncallback=1`)
+      .then(response => {
+        this.setState({
+          computers: response.data.photos.photo,
           loading: false
         });
       })
@@ -82,16 +78,23 @@ export default class App extends Component {
   
   render () {
     return (
-      <BrowserRouter>
-        <div className="container">
-          <Search onSearch={ this.performSearch } />
-          <Navigation />
+      <div className="container">
+        <Search onSearch={ this.performSearch } />
+        <Navigation />
+        {
+          (this.state.loading)
+          ? <h3>Loading...</h3>
+          :
           <Switch>
-            <Route path="/" render={() => <ImageList  data={ this.state.images } />} />
-            <Route exact path="/cats" render={() => <Navigation data={ this.state.cats } />} />
+            <Route exact path ="/" render={() => <PhotoContainer data={this.state.images} topic="Nature" />} />
+            <Route exact path="/search/:search" component={PhotoContainer} />
+            <Route path="/cats" render={() => <PhotoContainer data={this.state.cats} topic="Cats" />} />
+            <Route path="/dogs" render={() => <PhotoContainer data={this.state.dogs} topic="Dogs" />} />
+            <Route path="/computers" render={() => <PhotoContainer data={this.state.computers} topic="Computers" />} />
+            <Route component={NotFound} />
           </Switch>
-        </div>
-      </BrowserRouter>
+        }
+      </div>
     );
   }
 }
