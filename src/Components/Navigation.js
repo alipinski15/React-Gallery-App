@@ -1,6 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
+//The Navigation function sets the Nav links for each of the Nav buttons on the page. 
+
 const Navigation = (props) => {
   return(
     <nav className="main-nav">

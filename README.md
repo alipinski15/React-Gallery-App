@@ -1,3 +1,17 @@
+## Project Overview
+
+For this project I have built an App in React that fetches images from Flickr, and displays them on the page. The search field allows users to search a specific topic and has those images displayed when searched. In addition there are three default topics as Navigation links to display said topics. Here are some of the things I did to create this:
+
+  Used JavaScript and JSX to build out the gallery components in a modular fashion.
+  Used React Router to set up routes for three default topic pages and a search page.
+  Used the Fetch API or a tool like Axios to fetch data from the Flickr API and use it to display images in the app.
+  Added logic to handle the search and various requirements of the project.
+  Added to the supplied CSS to personalize the project.
+
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

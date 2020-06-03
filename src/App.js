@@ -45,7 +45,8 @@ export default class App extends Component {
         console.log('Error fetching and parsing data', error);
       });
     }
-
+  // The next three functions get images with a specific topic name. These are used for the Nav button on the page. 
+  
   catSearch = () => {
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=cats&per_page=24&format=json&nojsoncallback=1`)
       .then(response => {

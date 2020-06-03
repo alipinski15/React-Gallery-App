@@ -1,6 +1,6 @@
 import React from 'react';
 
-//This function creates elements that are displayed on the page when a search returns no results.
+//This function creates elements that are displayed on the page when the url does not match and returns an Error.
 
 const NotFound = () => (
   <li className="not-found">

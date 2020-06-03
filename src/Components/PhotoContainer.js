@@ -4,7 +4,7 @@ import NoResults from './NoResults';
 
 
 /*This function uses data passed to a prop, the 'map' function iterates over the data passed by the prop and creates a unique URL
-  as a prop from the 'Image' component. Then those images are displayed on the page. 
+  as a prop from the 'Image' component. Then those images are returned and displayed with the Topic and images. 
 */
 const PhotoContainer = (props) => {
    const imageData = props.data;

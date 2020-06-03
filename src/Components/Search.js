@@ -10,10 +10,13 @@ class Search extends Component {
   state = {
     searchText: ''
   }
-
+  //The onSearchChange update the state with the value inputted into search field. 
+  
   onSearchChange = (e) => {
     this.setState({ searchText: e.target.value });
   }
+  /*The handleSubmit takes the value submitted when a search is triggered,
+    and sets the url path to the query value.*/
 
   handleSubmit = (e) => {
     e.preventDefault();
