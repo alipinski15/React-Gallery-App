@@ -1,6 +1,6 @@
 import React from 'react';
-import Image from './Image';
-import NotFound from './NotFound';
+import Photo from './Photo';
+import NoResults from './NoResults';
 
 
 /*This function uses data passed to a prop, the 'map' function iterates over the data passed by the prop and creates a unique URL
@@ -19,10 +19,10 @@ const PhotoContainer = (props) => {
         const secret = image.secret;
         const url = `https://farm${farmId}.staticflickr.com/${server}/${id}_${secret}.jpg`;
 
-        return <Image url={url} key={id}/>
+        return <Photo url={url} key={id}/>
       })
     } else {
-      images = <NotFound />
+      images = <NoResults />
     }
     
     return(

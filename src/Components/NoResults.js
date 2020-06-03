@@ -2,13 +2,12 @@ import React from 'react';
 
 //This function creates elements that are displayed on the page when a search returns no results.
 
-const NotFound = () => (
+const NoResults = () => (
   <li className="not-found">
-    <img src="/404.png" alt=""/>
-    <h2>Error 404</h2>
-    <h3>The URL does not match existing route!</h3>
+    <h3>No Results Found</h3>
+    <p>You search did not return any results. Please try again.</p>
 </li>
 )
 
 
-export default NotFound;
+export default NoResults;
