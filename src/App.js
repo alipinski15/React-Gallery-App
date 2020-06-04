@@ -76,22 +76,26 @@ export default class App extends Component {
         });
       })
     }
+
+  loadingReset = () => {
+    this.setState({ loading: true})
+  }
   
   render () {
     return (
       <div className="container">
-        <Search onSearch={ this.performSearch } />
+        <Search onSearch={ this.performSearch } resetLoading={this.loadingReset }/>
         <Navigation />
         {
           (this.state.loading)
           ? <h3>Loading...</h3>
           :
           <Switch>
-            <Route exact path ="/" render={() => <PhotoContainer data={this.state.images} topic="Nature" />} />
-            <Route path="/search/:search" render={({match}) => <PhotoContainer data={this.state.images} topic={match.params.search} />} />
-            <Route path="/cats" render={() => <PhotoContainer data={this.state.cats} topic="Cats" />} />
-            <Route path="/dogs" render={() => <PhotoContainer data={this.state.dogs} topic="Dogs" />} />
-            <Route path="/computers" render={() => <PhotoContainer data={this.state.computers} topic="Computers" />} />
+            <Route exact path ="/" render={() => <PhotoContainer data={this.state.images} loading={this.state.loading} topic="Nature" />} />
+            <Route path="/search/:search" render={({match}) => <PhotoContainer data={this.state.images} loading={this.state.loading} topic={match.params.search} />} />
+            <Route path="/cats" render={() => <PhotoContainer data={this.state.cats} loading={this.state.loading} topic="Cats" />} />
+            <Route path="/dogs" render={() => <PhotoContainer data={this.state.dogs} loading={this.state.loading} topic="Dogs" />} />
+            <Route path="/computers" render={() => <PhotoContainer data={this.state.computers} loading={this.state.loading} topic="Computers" />} />
             <Route component={NotFound} />
           </Switch>
         }

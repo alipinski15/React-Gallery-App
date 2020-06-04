@@ -1,38 +1,37 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Photo from './Photo';
 import NoResults from './NoResults';
+
 
 
 /*This function uses data passed to a prop, the 'map' function iterates over the data passed by the prop and creates a unique URL
   as a prop from the 'Image' component. Then those images are returned and displayed with the Topic and images. 
 */
-const PhotoContainer = (props) => {
-   const imageData = props.data;
-   const topic = props.topic;
-   let images;
-
-    if(imageData.length > 0){
-      images = imageData.map(image => {
-        const farmId = image.farm;
-        const server = image.server;
-        const id = image.id;
-        const secret = image.secret;
-        const url = `https://farm${farmId}.staticflickr.com/${server}/${id}_${secret}.jpg`;
-
-        return <Photo url={url} key={id}/>
-      })
+class PhotoContainer extends Component {
+  
+  render() {
+    if(this.props.loading){
+      return <h2>Loading...</h2>
+    } else if (this.props.data.length ) {
+      return(
+        <div className="photo-container">
+          <h2>{this.props.topic}</h2>
+            <ul>
+              <Photo data={this.props.data}/>
+            </ul> 
+        </div>
+      );
     } else {
-      images = <NoResults />
+      return(
+        <div className="photo-container">
+          <h2>Results</h2>
+            <ul>
+              <NoResults />
+            </ul> 
+        </div>
+      );
     }
-    
-    return(
-      <div className="photo-container">
-        <h2>{topic}</h2>
-          <ul>
-            { images }
-          </ul> 
-      </div>
-    );
+  }
 }
 
 export default PhotoContainer;
