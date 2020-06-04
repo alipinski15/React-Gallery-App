@@ -84,7 +84,7 @@ export default class App extends Component {
   render () {
     return (
       <div className="container">
-        <Search onSearch={ this.performSearch } resetLoading={this.loadingReset }/>
+        <Search onSearch={ this.performSearch } resetLoading={ this.loadingReset }/>
         <Navigation />
         {
           (this.state.loading)
